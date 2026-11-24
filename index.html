@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Kreş ve gündüz bakımevleri için okula özel web siteleri. 35 kreşe özel hazırlanmış tasarımlar.">
+<meta property="og:title" content="Numan Web · Kreş"><meta property="og:description" content="Her kreşe kendi hikâyesini anlatan bir site.">
+<title>Numan Web · Kreş</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: oyun odası panosu — büyük "son çalışma" kartı, altında ekran görüntülü okul kartları ızgarası */
+:root{--bg:#fbf6ee;--surface:#ffffff;--fg:#24304a;--muted:#5f677c;--line:#ece2d2;--coral:#e8524a;--teal:#1f8f80;--sun:#f2b632;--chip:#f3ece0;--disp:'Fredoka',system-ui,sans-serif;--body:'Nunito',system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151a26;--surface:#1e2433;--fg:#eef1f7;--muted:#a7aec0;--line:#2f3748;--coral:#ff7a70;--teal:#4cc3b2;--sun:#f6c556;--chip:#262d3e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151a26;--surface:#1e2433;--fg:#eef1f7;--muted:#a7aec0;--line:#2f3748;--coral:#ff7a70;--teal:#4cc3b2;--sun:#f6c556;--chip:#262d3e;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16.5px;line-height:1.6;margin:0}
+::selection{background:var(--sun);color:#24304a}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0} a{color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-block:18px}
+.brand{font-family:var(--disp);font-size:1.35rem;font-weight:700;text-decoration:none;display:flex;gap:8px;align-items:center}
+.brand i{display:flex;gap:3px}.brand i b{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;background:var(--coral);color:#fff;text-decoration:none;font:inherit;font-weight:800;padding:11px 22px;border-radius:999px;border:0;cursor:pointer;white-space:nowrap;transition:transform .18s cubic-bezier(.2,.8,.2,1),filter .18s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.btn.alt{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 2px var(--line)}.btn.alt:hover{box-shadow:inset 0 0 0 2px var(--teal)}
+.hero .wrap{display:grid;grid-template-columns:1.4fr .8fr;gap:40px;align-items:end;padding-block:clamp(28px,5vw,64px) clamp(28px,4vw,44px)}
+.hero .wrap>*{min-width:0}
+.hero h1{font-size:clamp(2.3rem,5.6vw,4.3rem)}
+.hero h1 .c1{color:var(--coral)}.hero h1 .c2{color:var(--teal)}
+.hero .sub{color:var(--muted);font-size:1.12rem;max-width:56ch;margin-top:18px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px 18px}
+.stat b{display:block;font-family:var(--disp);font-size:2.4rem;line-height:1;color:var(--c)}
+.stat span{font-size:14px;color:var(--muted);font-weight:700}
+.work{padding-block:8px clamp(48px,7vw,84px)}
+.feat{display:grid!important;grid-template-columns:1.35fr 1fr;margin-bottom:28px}
+.bar{display:flex;justify-content:space-between;align-items:end;gap:14px 30px;flex-wrap:wrap;margin:clamp(30px,5vw,48px) 0 20px}
+.bar h2{font-size:clamp(1.8rem,3.8vw,2.6rem)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button{font:inherit;font-weight:800;font-size:14.5px;min-height:42px;padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;transition:border-color .15s}
+.chips button:hover{border-color:var(--teal)}
+.chips button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chips small{font-weight:700;opacity:.7;margin-left:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.card{display:grid;grid-template-rows:auto 1fr;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 34px -22px rgba(36,48,74,.55)}
+.shot{display:block;aspect-ratio:16/10;max-width:100%;overflow:hidden;background:var(--chip);border-bottom:1px solid var(--line)}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.card:hover .shot img{transform:scale(1.035)}
+.feat .shot{aspect-ratio:auto;height:100%;min-height:260px;border-bottom:0;border-right:1px solid var(--line)}
+.meta{display:flex;flex-direction:column;gap:6px;padding:18px 20px 20px}
+.feat .meta{padding:clamp(22px,4vw,40px);justify-content:center;gap:10px}
+.new{align-self:flex-start;font-size:12.5px;font-weight:800;background:var(--sun);color:#24304a;border-radius:999px;padding:3px 12px}
+.nm{font-family:var(--disp);font-weight:600;font-size:1.35rem;line-height:1.15}
+.feat .nm{font-size:clamp(1.8rem,3.2vw,2.5rem)}
+.pl{font-size:14px;font-weight:800;color:var(--teal)}
+.sg{color:var(--muted);font-size:15px}
+.feat .sg{font-size:1.05rem}
+.go{margin-top:auto;padding-top:6px;font-size:14px;font-weight:800;color:var(--coral)}
+.alt-s{background:var(--surface);border-block:1px solid var(--line)}
+section.pad{padding-block:clamp(44px,7vw,80px)}
+.h2{font-size:clamp(1.8rem,3.8vw,2.6rem);margin-bottom:26px}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px 30px}
+.feats div{display:grid;gap:6px;align-content:start;border-top:3px solid var(--c);padding-top:14px}
+.feats h3{font-size:1.2rem} .feats p{color:var(--muted);font-size:15px}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;counter-reset:s}
+.steps li{counter-increment:s;border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:8px;align-content:start;background:var(--surface)}
+.steps li::before{content:counter(s);width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:800;font-family:var(--disp)}
+.steps h3{font-size:1.15rem} .steps p{color:var(--muted);font-size:15px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.contact>*{min-width:0}
+.contact h2{font-size:clamp(1.9rem,4.2vw,3rem)}
+.contact .lead{color:var(--muted);margin-top:14px;max-width:46ch}
+.cbox{background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 20px}
+.crow{display:grid;grid-template-columns:96px 1fr auto;gap:12px;align-items:center;padding-block:14px;border-bottom:1px solid var(--line)}
+.crow:last-child{border-bottom:0}
+.clab{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cval{font-weight:800;word-break:break-word;user-select:all;min-width:0}
+.copy{font:inherit;font-size:13px;font-weight:800;min-height:40px;background:transparent;color:var(--teal);border:2px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:24px;font-size:13.5px;color:var(--muted)}
+@media (max-width:860px){.hero .wrap,.contact,.feat{grid-template-columns:1fr}.feat .shot{border-right:0;border-bottom:1px solid var(--line);aspect-ratio:16/10;min-height:0}.crow{grid-template-columns:1fr auto}.clab{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+
+<header class="top"><div class="wrap"><a class="brand" href="#"><i aria-hidden="true"><b style="--c:var(--coral)"></b><b style="--c:var(--sun)"></b><b style="--c:var(--teal)"></b></i>Numan Web</a><a class="btn" href="#iletisim">Teklif alın</a></div></header>
+<main>
+<section class="hero"><div class="wrap"><div>
+<h1>Her kreşe <span class="c1">kendi hikâyesini</span> anlatan <span class="c2">bir site.</span></h1>
+<p class="sub">Okulun Instagram'ını, logosunu ve eğitim yaklaşımını inceleyip ona özel tasarlıyorum. Turşu kuran kavanozdan tren biletli ön kayda, her sitede o okula ait bir oyun var. Veli programı, günü ve menüyü görüyor; ön kayıt tek dokunuşla okulun WhatsApp'ına düşüyor.</p>
+<div class="cta"><a class="btn" href="#isler">Çalışmaları gör</a><a class="btn alt" href="#iletisim">Okulunuza özel taslak isteyin</a></div></div>
+<div class="stats"><div class="stat" style="--c:var(--coral)"><b class="num">35</b><span>okula özel tasarım</span></div><div class="stat" style="--c:var(--teal)"><b class="num">12</b><span>şehir</span></div><div class="stat" style="--c:var(--sun)"><b class="num">3–5</b><span>iş gününde yayında</span></div><div class="stat" style="--c:var(--fg)"><b class="num">0</b><span>hazır şablon, her biri farklı</span></div></div>
+</div></section>
+<section class="work" id="isler"><div class="wrap">
+<a class="card feat" href="https://nnumanbekir-lgtm.github.io/minik-damlalar-kres/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/minik-damlalar-kres.jpg" alt="Minik Damlalar Kreş sitesinin açılış ekranı" loading="eager" width="640" height="400"></span>
+<span class="meta"><span class="new">Son çalışma</span><span class="nm">Minik Damlalar Kreş</span><span class="pl">Dikmen, Ankara</span><span class="sg">Yaş kaydırıcısı, fotoğraf ve video galerili oyun grupları, 4 adımlı canlı turşu deneyi.</span><span class="go">Siteyi aç ↗</span></span></a>
+<div class="bar"><h2>Okullara özel hazırladığım siteler</h2>
+<div class="chips" role="group" aria-label="Şehre göre süz"><button type="button" data-f="all" aria-pressed="true">Tümü<small class="num">34</small></button><button type="button" data-f="Ankara" aria-pressed="false">Ankara<small class="num">20</small></button><button type="button" data-f="other" aria-pressed="false">Diğer şehirler<small class="num">14</small></button></div></div>
+<div class="grid" id="grid">
+<a class="card" href="https://nnumanbekir-lgtm.github.io/joykids-ankara/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/joykids-ankara.jpg" alt="JoyKids Oyun Cafe sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">JoyKids Oyun Cafe</span><span class="pl">Etimesgut, Ankara</span><span class="sg">Yaşa göre o haftanın seanslarını yakan program ve 90 dakikalık seans saati.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/parla-doga-anaokulu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/parla-doga-anaokulu.jpg" alt="Parla Doğa Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Parla Doğa Anaokulu</span><span class="pl">Mamak, Ankara</span><span class="sg">Reggio Emilia proje yolu ve dokununca yanan ışık masası.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/minik-tohum-anaokulu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/minik-tohum-anaokulu.jpg" alt="Minik Tohum Butik Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Minik Tohum Butik Anaokulu</span><span class="pl">Keçiören, Ankara</span><span class="sg">Montessori rafı ve su aktarma oyunu.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/ludo-anaokulu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/ludo-anaokulu.jpg" alt="Ludo Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Ludo Anaokulu</span><span class="pl">Beştepe, Ankara</span><span class="sg">L-U-D-O harf kutuları ve zarla oynanan ludo tahtası.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/gelisimevi-anaokulu/" target="_blank" rel="noopener" data-g="İstanbul">
+<span class="shot"><img src="shots/gelisimevi-anaokulu.jpg" alt="GelişimEvi Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">GelişimEvi Anaokulu</span><span class="pl">Çekmeköy, İstanbul</span><span class="sg">Yerli malı haftası pazarı ve sürdürülebilir kalkınma amaçları panosu.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/dunya-cocuk-anaokulu/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/dunya-cocuk-anaokulu.jpg" alt="Dünya Çocuk Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Dünya Çocuk Anaokulu</span><span class="pl">Antakya, Hatay</span><span class="sg">Okulun kat planı ve yaşa göre gelişim kontrol listesi.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/yaprak-cocuk-kres/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/yaprak-cocuk-kres.jpg" alt="Yaprak Çocuk Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Yaprak Çocuk Kreş</span><span class="pl">Eryaman, Ankara</span><span class="sg">Branşların yaprak olduğu bir ağaç ve günün saatine göre akış.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/cennet-melekleri-kres/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/cennet-melekleri-kres.jpg" alt="Cennet Melekleri Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Cennet Melekleri Kreş</span><span class="pl">Selçuklu, Konya</span><span class="sg">Sınıf kapıları, çevrilen değer kartları ve iki kampüs.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/yasemin-tutak-anaokulu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/yasemin-tutak-anaokulu.jpg" alt="Yasemin Tutak Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Yasemin Tutak Anaokulu</span><span class="pl">Etlik, Ankara</span><span class="sg">İlgi alanından branş öneren eşleştirici ve çocuk hakları çarkı.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/sevimli-tirtillar-kres/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/sevimli-tirtillar-kres.jpg" alt="Sevimli Tırtıllar Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Sevimli Tırtıllar Kreş</span><span class="pl">Batıkent, Ankara</span><span class="sg">Tırtıldan kelebeğe dönüşüm kaydırıcısı ve okul mutfağı oyunu.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/gulveren-anaokulu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/gulveren-anaokulu.jpg" alt="Gülveren Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Gülveren Anaokulu</span><span class="pl">Sincan, Ankara</span><span class="sg">Boya kalemi kutusu ve şekil sudokusu.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/minik-kalpler-oyun-evi/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/minik-kalpler-oyun-evi.jpg" alt="Minik Kalpler Oyun Evi sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Minik Kalpler Oyun Evi</span><span class="pl">Elvan, Ankara</span><span class="sg">Yaşa göre değişen haftalık planlayıcı ve “kreşe hazır” kalbi.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/bal-damlasi-anaokulu/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/bal-damlasi-anaokulu.jpg" alt="Bal Damlası Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Bal Damlası Anaokulu</span><span class="pl">Safranköyü, Yalova</span><span class="sg">Günün akışını gösteren güneş kaydırıcısı ve bal peteği değerler.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/neseli-izler-preschool/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/neseli-izler-preschool.jpg" alt="Neşeli İzler Preschool sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Neşeli İzler Preschool</span><span class="pl">Çayyolu, Ankara</span><span class="sg">Tam gün ve yarım gün programları, iz bırakan neşeli bir tasarım.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/nartanesi-kres/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/nartanesi-kres.jpg" alt="Nartanesi Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Nartanesi Kreş</span><span class="pl">Konyaaltı, Antalya</span><span class="sg">Güvenli okul ve bilimsel eğitim vurgusuyla nar temalı bir kimlik.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/minik-mucizeler-kres/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/minik-mucizeler-kres.jpg" alt="Minik Mucizeler Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Minik Mucizeler Kreş</span><span class="pl">Mamak, Ankara</span><span class="sg">“Her çocuk bir mucize” sloganından doğan gökkuşağı teması.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/mavi-pusula-anaokulu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/mavi-pusula-anaokulu.jpg" alt="Mavi Pusula Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Mavi Pusula Anaokulu</span><span class="pl">Etimesgut, Ankara</span><span class="sg">Pusula temasıyla İngilizce, jimnastik ve Montessori yolculuğu.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/mavi-lotus-anaokulu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/mavi-lotus-anaokulu.jpg" alt="Mavi Lotus Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Mavi Lotus Anaokulu</span><span class="pl">Törekent, Ankara</span><span class="sg">Her çocuğun kendi zamanında açtığı lotus çiçeği teması.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/kok-cocuk-kres/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/kok-cocuk-kres.jpg" alt="Kök Çocuk Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Kök Çocuk Kreş</span><span class="pl">Batıkent, Ankara</span><span class="sg">Ergoterapist destekli kreş için kökler ve dallar teması.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/kara-balik-kres/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/kara-balik-kres.jpg" alt="Kara Balık Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Kara Balık Kreş</span><span class="pl">Keçiören, Ankara</span><span class="sg">Ekransız ve şekersiz okul, her çocuğun bireysel yolculuğu.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/kivircik-anaokulu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/kivircik-anaokulu.jpg" alt="Kıvırcık Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Kıvırcık Anaokulu</span><span class="pl">Güventepe, Ankara</span><span class="sg">Cumartesi oyun grubu ve drama, kıvır kıvır saçlı karakter.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/gulucuk-oyun-evi/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/gulucuk-oyun-evi.jpg" alt="Gülücük Oyun Evi sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Gülücük Oyun Evi</span><span class="pl">Beşirli, Trabzon</span><span class="sg">Oyun grupları ve gelişim etkinlikleri, güneş gibi gülen bir oyun evi.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/ccans-cocuk-akademisi/" target="_blank" rel="noopener" data-g="İstanbul">
+<span class="shot"><img src="shots/ccans-cocuk-akademisi.jpg" alt="CCAN&#x27;S Çocuk Akademisi sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">CCAN&#x27;S Çocuk Akademisi</span><span class="pl">Arnavutköy, İstanbul</span><span class="sg">İngilizce konuşan, oyunla öğrenen çocuklar için akademi.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/findikkurdu-anaokulu/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/findikkurdu-anaokulu.jpg" alt="Minik Fındıkkurdu Anaokulu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Minik Fındıkkurdu Anaokulu</span><span class="pl">Artuklu, Mardin</span><span class="sg">Mardin&#x27;in taş evleri arasında rengârenk bir yuva.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/yasemin-gunduz-bakimevi/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/yasemin-gunduz-bakimevi.jpg" alt="Yasemin Gündüz Bakımevi sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Yasemin Gündüz Bakımevi</span><span class="pl">Giresun</span><span class="sg">Montessori ve doğa vurgusu, yarım gün ve tam gün seçici.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/kiddie-garden/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/kiddie-garden.jpg" alt="Kiddie Garden sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Kiddie Garden</span><span class="pl">Karaköprü, Şanlıurfa</span><span class="sg">Gökkuşağı kapılı bahçe ve “Bugün hangi ders var?” aracı.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/bilge-cocuk-kres/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/bilge-cocuk-kres.jpg" alt="Bilge Çocuk Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Bilge Çocuk Kreş</span><span class="pl">Kızıltepe, Mardin</span><span class="sg">Psikoloji temelli eğitim için “önce duygular” bölümü ve iki kampüs.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/kahta-minik-eller/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/kahta-minik-eller.jpg" alt="Minik Eller Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Minik Eller Kreş</span><span class="pl">Kâhta, Adıyaman</span><span class="sg">Ekrana dokununca el izi bırakılan duvar, beş parmak beş beceri.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/minik-yildizlar-viransehir/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/minik-yildizlar-viransehir.jpg" alt="Özel Minik Yıldızlar sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Özel Minik Yıldızlar</span><span class="pl">Viranşehir, Şanlıurfa</span><span class="sg">Etkinliklerden bir yıldız haritası ve dört mevsim programı.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/minik-yildizlar-kres/" target="_blank" rel="noopener" data-g="Diğer">
+<span class="shot"><img src="shots/minik-yildizlar-kres.jpg" alt="Minik Yıldızlar sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Minik Yıldızlar</span><span class="pl">Şahinbey, Gaziantep</span><span class="sg">Duyu temelli eğitim için “beş duyu” bölümü.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/hayal-istasyonu/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/hayal-istasyonu.jpg" alt="Hayal İstasyonu sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Hayal İstasyonu</span><span class="pl">Eryaman, Ankara</span><span class="sg">Logodaki trenden bir yolculuk: sınıflar durak, ön kayıt bir tren bileti.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/botanik-kres/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/botanik-kres.jpg" alt="Botanik İngilizce Kültür sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Botanik İngilizce Kültür</span><span class="pl">Batıkent, Ankara</span><span class="sg">İki dilli bitki etiketleri ve çevrilen “haftanın kelimeleri”.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/calikusu-kres/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/calikusu-kres.jpg" alt="Çalıkuşu Kreş sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Çalıkuşu Kreş</span><span class="pl">Ankara</span><span class="sg">Kuş yuvası teması; gruplar Civcivler&#x27;den Çalıkuşları&#x27;na.</span><span class="go">Siteyi aç ↗</span></span></a>
+<a class="card" href="https://nnumanbekir-lgtm.github.io/yetisen-minik-adimlar/" target="_blank" rel="noopener" data-g="Ankara">
+<span class="shot"><img src="shots/yetisen-minik-adimlar.jpg" alt="Yetişen Minik Adımlar sitesinin açılış ekranı" loading="lazy" width="640" height="400"></span>
+<span class="meta"><span class="nm">Yetişen Minik Adımlar</span><span class="pl">Ankara</span><span class="sg">Girişte boy ölçer ve doğum ayından grup bulan araç.</span><span class="go">Siteyi aç ↗</span></span></a>
+</div></div></section>
+<section class="alt-s pad"><div class="wrap"><h2 class="h2">Her sitede velinin aradığı bölümler</h2><div class="feats">
+<div style="--c:var(--coral)"><h3>Okula özel bir oyun</h3><p>Yaş kaydırıcısı, turşu kavanozu, ışık masası… Veli siteyi gezmekle kalmaz, oynar ve okulu aklında tutar.</p></div>
+<div style="--c:var(--teal)"><h3>Gruplar ve program</h3><p>Çocuğun yaşına göre grubu, günlük akış ve etkinlikler bir bakışta.</p></div>
+<div style="--c:var(--sun)"><h3>Ön kayıt WhatsApp'a</h3><p>Form, hazır yazılmış bir mesaj olarak okulun telefonuna düşer.</p></div>
+<div style="--c:var(--fg)"><h3>Telefonda kusursuz</h3><p>Velilerin çoğu telefondan bakar; her site önce telefona göre tasarlanır.</p></div></div></div></section>
+<section class="pad"><div class="wrap"><h2 class="h2">Dört adımda yayında</h2>
+<ol class="steps"><li><h3>İnceleme</h3><p>Okulunuzu, Instagram'ınızı ve velilerin yorumlarını inceliyorum.</p></li><li><h3>Size özel taslak</h3><p>Okulunuza özel bir taslak hazırlıyorum; karar vermeden önce görüyorsunuz.</p></li><li><h3>Düzenleme</h3><p>Fotoğraflarınız ve bilgilerinizle siteyi son hâline getiriyoruz.</p></li><li><h3>Yayın ve bakım</h3><p>Kendi alan adınızla yayına alıyorum, güncellemeleri ben yapıyorum.</p></li></ol></div></section>
+<section class="alt-s pad" id="iletisim"><div class="wrap contact"><div><h2>Okulunuza özel taslak isteyin</h2><p class="lead">Okulunuzun adını yazmanız yeterli. Birkaç gün içinde size özel bir taslak hazırlayıp gönderirim.</p>
+<div class="cta"><a class="btn" href="https://wa.me/905525690080" target="_blank" rel="noopener">WhatsApp'tan yazın</a></div></div>
+<div class="cbox"><div class="crow"><span class="clab">WhatsApp</span><span class="cval num" id="c0">0552 569 00 80</span><button class="copy" type="button" data-t="c0">Kopyala</button></div><div class="crow"><span class="clab">E-posta</span><span class="cval" id="c1">nnumanbekir@gmail.com</span><button class="copy" type="button" data-t="c1">Kopyala</button></div></div></div></section>
+</main>
+<footer><div class="wrap"><span>© 2026 Numan Bekir Başpunar · Ankara</span><span>Kreş ve gündüz bakımevleri için web tasarım</span></div></footer>
+<script>
+document.querySelectorAll('.chips button').forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f;document.querySelectorAll('.chips button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});document.querySelectorAll('#grid .card').forEach(function(c){var g=c.dataset.g;c.hidden=!(f==='all'||(f==='Ankara'?g==='Ankara':g!=='Ankara'))})})});
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var el=document.getElementById(b.dataset.t);function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Seçildi'}try{navigator.clipboard.writeText(el.textContent).then(function(){b.textContent='Kopyalandı'},sel)}catch(x){sel()}setTimeout(function(){b.textContent='Kopyala'},2000)})});
+</script>
+</body></html>
